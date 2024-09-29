@@ -100,6 +100,7 @@ public class TemperatureSeriesAnalysisTest {
         double actualResult = seriesAnalysis.max();
         assertEquals(expResult, actualResult, 0.00001);
     }
+    
 
     @Test
     public void testFindTempClosestToZero() {
