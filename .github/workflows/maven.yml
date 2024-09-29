@@ -33,11 +33,11 @@ jobs:
       run: mvn -B test --file pom.xml
     - name: Build with Maven with checkstyle
       run: mvn -B verify checkstyle:checkstyle
-    - uses: jwgmeligmeyling/checkstyle-github-action@v2.0
+    - uses: jwgmeligmeyling/checkstyle-github-action@master
       with:
         path: '**/checkstyle-result.xml'
     - name: Spotbugs
       run: mvn spotbugs:check
-    - uses: jwgmeligmeyling/spotbugs-github-action@v2.0
+    - uses: jwgmeligmeyling/spotbugs-github-action@master
       with:
         path: '**/spotbugsXml.xml'
