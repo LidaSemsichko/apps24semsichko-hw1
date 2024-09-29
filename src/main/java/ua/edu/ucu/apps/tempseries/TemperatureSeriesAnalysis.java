@@ -125,6 +125,7 @@ public class TemperatureSeriesAnalysis {
         this.temperatureSeries = new double[0];
     }
 
+    
     public double[] sortTemps() {
         double[] sortedTemps = temperatureSeries.clone();
         java.util.Arrays.sort(sortedTemps);
