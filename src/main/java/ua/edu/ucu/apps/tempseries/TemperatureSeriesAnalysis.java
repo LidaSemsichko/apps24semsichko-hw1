@@ -143,6 +143,7 @@ public class TemperatureSeriesAnalysis {
         this.temperatureSeries = newTemperatureSeries;
         return temperatureSeries.length;
     }
+    
 }
 
 
