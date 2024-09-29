@@ -124,3 +124,4 @@ public class TemperatureSeriesAnalysisTest {
         assertEquals(5.0, statistics.getMaxTemp(), 0.00001);
     }
 }
+
