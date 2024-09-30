@@ -59,7 +59,6 @@ package ua.edu.ucu.tempseries;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import ua.edu.ucu.apps.tempseries.TemperatureSeriesAnalysis;
-import ua.edu.ucu.apps.tempseries.TempSummaryStatistics;
 
 public class TemperatureSeriesAnalysisTest {
 
@@ -78,7 +77,7 @@ public class TemperatureSeriesAnalysisTest {
         double[] temperatureSeries = {};
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
 
-        seriesAnalysis.average(); // should throw exception
+        seriesAnalysis.average();
     }
     
 
@@ -113,17 +112,4 @@ public class TemperatureSeriesAnalysisTest {
         assertEquals(expResult, actualResult, 0.00001);
     }
 
-
-//     @Test
-//     public void testSummaryStatistics() {
-//         double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0};
-//         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
-//         TempSummaryStatistics statistics = seriesAnalysis.summaryStatistics();
-
-//         assertEquals(1.0, statistics.getAvgTemp(), 0.00001);
-//         assertEquals(3.741657, statistics.getDevTemp(), 0.00001);
-//         assertEquals(-5.0, statistics.getMinTemp(), 0.00001);
-//         assertEquals(5.0, statistics.getMaxTemp(), 0.00001);
-//     }
 }
-

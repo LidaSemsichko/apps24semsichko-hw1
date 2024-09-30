@@ -3,12 +3,10 @@ package ua.edu.ucu.apps.tempseries;
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
 
-    // Default constructor
     public TemperatureSeriesAnalysis() {
         this.temperatureSeries = new double[0];
     }
 
-    // Constructor with defensive copy
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         this.temperatureSeries = temperatureSeries.clone();
     }
@@ -36,9 +34,9 @@ public class TemperatureSeriesAnalysis {
         double sumOfSquaredDiffs = 0.0;
 
         for (double temp : temperatureSeries) {
-            sumOfSquaredDiffs += (temp - mean) * (temp - mean); // Corrected
+            sumOfSquaredDiffs += (temp - mean) * (temp - mean);
         }
-        return Math.sqrt(sumOfSquaredDiffs / temperatureSeries.length);
+        return (sumOfSquaredDiffs / temperatureSeries.length) * 0.5;
     }
 
     public double min() {
@@ -47,13 +45,13 @@ public class TemperatureSeriesAnalysis {
                 "Temperature series is empty"
                 );
         }
-        double minTemp = temperatureSeries[0];
+        double mini = temperatureSeries[0];
         for (double temp : temperatureSeries) {
-            if (temp < minTemp) {
-                minTemp = temp;
+            if (temp < mini) {
+                mini = temp;
             }
         }
-        return minTemp;
+        return mini;
     }
 
     public double max() {
@@ -62,13 +60,13 @@ public class TemperatureSeriesAnalysis {
                 "Temperature series is empty"
                 );
         }
-        double maxTemp = temperatureSeries[0];
+        double maxi = temperatureSeries[0];
         for (double temp : temperatureSeries) {
-            if (temp > maxTemp) {
-                maxTemp = temp;
+            if (temp > maxi) {
+                maxi = temp;
             }
         }
-        return maxTemp;
+        return maxi;
     }
 
     public double findTempClosestToZero() {
@@ -103,8 +101,7 @@ public class TemperatureSeriesAnalysis {
         }
         return closest;
     }
-
-    // Efficient implementation without ArrayList overhead
+    
     public double[] findTempsLessThan(double tempValue) {
         int count = 0;
         for (double temp : temperatureSeries) {
