@@ -1,7 +1,5 @@
 package ua.edu.ucu.apps.tempseries;
 
-import java.util.ArrayList;
-
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
 
@@ -178,7 +176,9 @@ public class TemperatureSeriesAnalysis {
         double[] newTemperatureSeries = new double[
             temperatureSeries.length + temps.length
             ];
-        System.arraycopy(temperatureSeries, 0, newTemperatureSeries, 0, temperatureSeries.length);
+        System.arraycopy(temperatureSeries, 
+        0, newTemperatureSeries, 0, 
+        temperatureSeries.length);
         System.arraycopy(temps, 0
         , newTemperatureSeries, temperatureSeries.length, temps.length);
         this.temperatureSeries = newTemperatureSeries;
