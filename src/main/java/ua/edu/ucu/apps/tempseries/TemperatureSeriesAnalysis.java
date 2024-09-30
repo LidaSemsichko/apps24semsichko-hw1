@@ -5,17 +5,21 @@ import java.util.ArrayList;
 public class TemperatureSeriesAnalysis {
     private double[] temperatureSeries;
 
+    // Default constructor
     public TemperatureSeriesAnalysis() {
         this.temperatureSeries = new double[0];
     }
 
+    // Constructor with defensive copy
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        this.temperatureSeries = temperatureSeries;
+        this.temperatureSeries = temperatureSeries.clone();
     }
 
     public double average() {
         if (temperatureSeries.length == 0) {
-            throw new IllegalArgumentException("Temperature series is empty");
+            throw new IllegalArgumentException(
+                "Temperature series is empty"
+                );
         }
         double sum = 0;
         for (double temp : temperatureSeries) {
@@ -26,20 +30,24 @@ public class TemperatureSeriesAnalysis {
 
     public double deviation() {
         if (temperatureSeries.length == 0) {
-            throw new IllegalArgumentException("Temperature series is empty");
+            throw new IllegalArgumentException(
+                "Temperature series is empty"
+                );
         }
         double mean = average();
         double sumOfSquaredDiffs = 0.0;
 
         for (double temp : temperatureSeries) {
-            sumOfSquaredDiffs += (temp - mean) * 2;
+            sumOfSquaredDiffs += (temp - mean) * (temp - mean); // Corrected
         }
         return Math.sqrt(sumOfSquaredDiffs / temperatureSeries.length);
     }
 
     public double min() {
         if (temperatureSeries.length == 0) {
-            throw new IllegalArgumentException("Temperature series is empty");
+            throw new IllegalArgumentException(
+                "Temperature series is empty"
+                );
         }
         double minTemp = temperatureSeries[0];
         for (double temp : temperatureSeries) {
@@ -52,7 +60,9 @@ public class TemperatureSeriesAnalysis {
 
     public double max() {
         if (temperatureSeries.length == 0) {
-            throw new IllegalArgumentException("Temperature series is empty");
+            throw new IllegalArgumentException(
+                "Temperature series is empty"
+                );
         }
         double maxTemp = temperatureSeries[0];
         for (double temp : temperatureSeries) {
@@ -65,7 +75,9 @@ public class TemperatureSeriesAnalysis {
 
     public double findTempClosestToZero() {
         if (temperatureSeries.length == 0) {
-            throw new IllegalArgumentException("Temperature series is empty");
+            throw new IllegalArgumentException(
+                "Temperature series is empty"
+                );
         }
         double closest = temperatureSeries[0];
         for (double temp : temperatureSeries) {
@@ -79,7 +91,9 @@ public class TemperatureSeriesAnalysis {
 
     public double findTempClosestToValue(double tempValue) {
         if (temperatureSeries.length == 0) {
-            throw new IllegalArgumentException("Temperature series is empty");
+            throw new IllegalArgumentException(
+                "Temperature series is empty"
+                );
         }
         double closest = temperatureSeries[0];
         for (double temp : temperatureSeries) {
@@ -92,40 +106,62 @@ public class TemperatureSeriesAnalysis {
         return closest;
     }
 
+    // Efficient implementation without ArrayList overhead
     public double[] findTempsLessThan(double tempValue) {
-        ArrayList<Double> result = new ArrayList<>();
+        int count = 0;
         for (double temp : temperatureSeries) {
             if (temp < tempValue) {
-                result.add(temp);
+                count++;
             }
         }
-        return result.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] result = new double[count];
+        int index = 0;
+        for (double temp : temperatureSeries) {
+            if (temp < tempValue) {
+                result[index++] = temp;
+            }
+        }
+        return result;
     }
 
     public double[] findTempsGreaterThan(double tempValue) {
-        ArrayList<Double> result = new ArrayList<>();
+        int count = 0;
         for (double temp : temperatureSeries) {
             if (temp > tempValue) {
-                result.add(temp);
+                count++;
             }
         }
-        return result.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] result = new double[count];
+        int index = 0;
+        for (double temp : temperatureSeries) {
+            if (temp > tempValue) {
+                result[index++] = temp;
+            }
+        }
+        return result;
     }
 
-    public double[] findTempsInRange(double lowerBound, double upperBound) {
-        ArrayList<Double> result = new ArrayList<>();
+    public double[] findTempsInRange(
+        double lowerBound, double upperBound) {
+        int count = 0;
         for (double temp : temperatureSeries) {
             if (temp >= lowerBound && temp <= upperBound) {
-                result.add(temp);
+                count++;
             }
         }
-        return result.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] result = new double[count];
+        int index = 0;
+        for (double temp : temperatureSeries) {
+            if (temp >= lowerBound && temp <= upperBound) {
+                result[index++] = temp;
+            }
+        }
+        return result;
     }
 
     public void reset() {
         this.temperatureSeries = new double[0];
     }
-
 
     public double[] sortTemps() {
         double[] sortedTemps = temperatureSeries.clone();
@@ -134,28 +170,19 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TempSummaryStatistics summaryStatistics() {
-        return new TempSummaryStatistics(average(), deviation(), min(), max());
+        return new TempSummaryStatistics(average(), 
+        deviation(), min(), max());
     }
 
     public int addTemps(double... temps) {
-        double[] newTemperatureSeries = new double[temperatureSeries.length + temps.length];
-        System.arraycopy(
-            temperatureSeries, 
-            0,
-            newTemperatureSeries, 
-            0, 
-            temperatureSeries.length);
-        System.arraycopy(temps, 0, 
-        newTemperatureSeries, 
-        temperatureSeries.length, 
-        temps.length);
+        double[] newTemperatureSeries = new double[
+            temperatureSeries.length + temps.length
+            ];
+        System.arraycopy(temperatureSeries, 0
+        , newTemperatureSeries, 0, temperatureSeries.length);
+        System.arraycopy(temps, 0
+        , newTemperatureSeries, temperatureSeries.length, temps.length);
         this.temperatureSeries = newTemperatureSeries;
         return temperatureSeries.length;
     }
-
 }
-
-
-
-
-
