@@ -6,6 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
+
 name: Java CI with Maven
 
 on:
@@ -18,7 +19,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+      packages: write
+      checks: write
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -33,11 +37,11 @@ jobs:
       run: mvn -B test --file pom.xml
     - name: Build with Maven with checkstyle
       run: mvn -B verify checkstyle:checkstyle
-    - uses: jwgmeligmeyling/checkstyle-github-action@main
+    - uses: lcollins/checkstyle-github-action@master
       with:
         path: '**/checkstyle-result.xml'
     - name: Spotbugs
       run: mvn spotbugs:check
-    - uses: jwgmeligmeyling/spotbugs-github-action@main
+    - uses: jwgmeligmeyling/spotbugs-github-action@master
       with:
         path: '**/spotbugsXml.xml'
