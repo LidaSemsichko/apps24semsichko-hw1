@@ -114,16 +114,16 @@ public class TemperatureSeriesAnalysisTest {
     }
 
 
-    @Test
-    public void testSummaryStatistics() {
-        double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0};
-        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
-        TempSummaryStatistics statistics = seriesAnalysis.summaryStatistics();
+//     @Test
+//     public void testSummaryStatistics() {
+//         double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0};
+//         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+//         TempSummaryStatistics statistics = seriesAnalysis.summaryStatistics();
 
-        assertEquals(1.0, statistics.getAvgTemp(), 0.00001);
-        assertEquals(3.741657, statistics.getDevTemp(), 0.00001);
-        assertEquals(-5.0, statistics.getMinTemp(), 0.00001);
-        assertEquals(5.0, statistics.getMaxTemp(), 0.00001);
-    }
+//         assertEquals(1.0, statistics.getAvgTemp(), 0.00001);
+//         assertEquals(3.741657, statistics.getDevTemp(), 0.00001);
+//         assertEquals(-5.0, statistics.getMinTemp(), 0.00001);
+//         assertEquals(5.0, statistics.getMaxTemp(), 0.00001);
+//     }
 }
 

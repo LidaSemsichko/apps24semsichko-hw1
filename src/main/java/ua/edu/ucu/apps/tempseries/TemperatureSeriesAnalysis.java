@@ -32,7 +32,7 @@ public class TemperatureSeriesAnalysis {
         double sumOfSquaredDiffs = 0.0;
 
         for (double temp : temperatureSeries) {
-            sumOfSquaredDiffs += Math.pow(temp - mean, 2);
+            sumOfSquaredDiffs += (temp - mean) * 2;
         }
         return Math.sqrt(sumOfSquaredDiffs / temperatureSeries.length);
     }
@@ -69,8 +69,8 @@ public class TemperatureSeriesAnalysis {
         }
         double closest = temperatureSeries[0];
         for (double temp : temperatureSeries) {
-            if (Math.abs(temp) < Math.abs(closest) || 
-                (Math.abs(temp) == Math.abs(closest) && temp > closest)) {
+            if (Math.abs(temp) < Math.abs(closest) 
+            || (Math.abs(temp) == Math.abs(closest) && temp > closest)) {
                 closest = temp;
             }
         }
@@ -83,8 +83,9 @@ public class TemperatureSeriesAnalysis {
         }
         double closest = temperatureSeries[0];
         for (double temp : temperatureSeries) {
-            if (Math.abs(temp - tempValue) < Math.abs(closest - tempValue) || 
-                (Math.abs(temp - tempValue) == Math.abs(closest - tempValue) && temp > closest)) {
+            if (Math.abs(temp - tempValue) < Math.abs(closest - tempValue) 
+            || (Math.abs(temp - tempValue) == Math.abs(closest - tempValue) 
+            && temp > closest)) {
                 closest = temp;
             }
         }
@@ -138,8 +139,16 @@ public class TemperatureSeriesAnalysis {
 
     public int addTemps(double... temps) {
         double[] newTemperatureSeries = new double[temperatureSeries.length + temps.length];
-        System.arraycopy(temperatureSeries, 0, newTemperatureSeries, 0, temperatureSeries.length);
-        System.arraycopy(temps, 0, newTemperatureSeries, temperatureSeries.length, temps.length);
+        System.arraycopy(
+            temperatureSeries, 
+            0,
+            newTemperatureSeries, 
+            0, 
+            temperatureSeries.length);
+        System.arraycopy(temps, 0, 
+        newTemperatureSeries, 
+        temperatureSeries.length, 
+        temps.length);
         this.temperatureSeries = newTemperatureSeries;
         return temperatureSeries.length;
     }
